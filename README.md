@@ -10,7 +10,6 @@ A Python-based implementation of Tic-Tac-Toe using Q-learning, featuring both tr
 - [Directory Structure](#directory-structure)
 - [Configuration](#configuration)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Introduction
 This project demonstrates the use of Reinforcement Learning (RL) to play Tic-Tac-Toe. It employs Q-learning, a model-free RL algorithm, to train agents that can play against each other. Additionally, it allows for testing the trained model by playing against a human player.
