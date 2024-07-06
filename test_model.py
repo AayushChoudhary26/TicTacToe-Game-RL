@@ -110,8 +110,8 @@ def user_move(available_actions: list) -> tuple:
                     return (row, col)
 
 def main() -> None:
-    agent1_file = "agent1_q_table.pkl"
-    agent2_file = "agent2_q_table.pkl"
+    agent1_file = "agents/agent1_q_table.pkl"
+    agent2_file = "agents/agent2_q_table.pkl"
     
     env = TicTacToe()
     
@@ -134,7 +134,7 @@ def main() -> None:
         while not done:
             if env.current_player == user_player:
                 available_actions = env.available_actions()
-                action = user_move(state, available_actions)
+                action = user_move(available_actions)
             else:
                 available_actions = env.available_actions()
                 action = agent.choose_action(state, available_actions)
