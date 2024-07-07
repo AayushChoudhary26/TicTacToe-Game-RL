@@ -87,7 +87,8 @@ class QLearningAgent:
         max_q = max(q_values)
         chosen_action = random.choice([a for a, q in zip(available_actions, q_values) if q == max_q])
         
-        self.actions_taken += f"""New Game: \nAvailable Actions: \n"""
+        self.actions_taken += f"""Game State: \n{board}\n"""
+        self.actions_taken += f"""Available Actions: \n"""
         for q_value in q_values:
             self.actions_taken += f"\t{q_value}\n"
         self.actions_taken += f"""Chosen Action: \n\t{max_q}\n\n\n"""
@@ -159,7 +160,7 @@ def main() -> None:
             done = env.make_move(action)
 
             if done:
-                print("Game over.")
+                print()
                 time.sleep(2)
         
         agent.save_actions_taken(actions_taken_file, persist=True)
