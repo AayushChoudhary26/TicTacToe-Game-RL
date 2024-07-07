@@ -66,7 +66,7 @@ python test_model.py
 ## Directory Structure
 
 ```
-reinforcement-learning-tictactoe/
+TicTacToe-Game-RL/
 │
 ├── agents/
 │   ├── agent1_q_table.pkl         # Q-table for agent 1
