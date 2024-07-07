@@ -77,6 +77,7 @@ class QLearningAgent:
     def __init__(self, player: int, q_table: dict) -> None:
         self.q_table = q_table
         self.player = player
+        self.actions_taken = ""
     
     def get_state(self, board: np.ndarray) -> tuple:
         return tuple(map(tuple, board))
@@ -86,10 +87,23 @@ class QLearningAgent:
         max_q = max(q_values)
         chosen_action = random.choice([a for a, q in zip(available_actions, q_values) if q == max_q])
         
+        self.actions_taken += f"""New Game: \nAvailable Actions: \n"""
+        for q_value in q_values:
+            self.actions_taken += f"\t{q_value}\n"
+        self.actions_taken += f"""Chosen Action: \n\t{max_q}\n\n\n"""
+        
         print(f"\nPlayer {1 if self.player == 1 else 2} Q-values: {q_values}")
         print(f"\nPlayer {1 if self.player == 1 else 2} chooses action: {chosen_action} \nwith Q-value: {max_q}\n")
         
         return chosen_action
+    
+    def save_actions_taken(self, filename: str, persist: bool = False) -> None:
+        if persist:
+            with open(filename, 'a') as f:
+                f.write(str(self.actions_taken) + '\n')
+        
+        with open(filename, 'w') as f:
+            f.write(str(self.actions_taken))
 
 def load_q_table(filename: str) -> dict:
     with open(filename, 'rb') as f:
@@ -112,6 +126,7 @@ def user_move(available_actions: list) -> tuple:
 def main() -> None:
     agent1_file = "agents/agent1_q_table.pkl"
     agent2_file = "agents/agent2_q_table.pkl"
+    actions_taken_file = "output_files/actions_taken.txt"
     
     env = TicTacToe()
     
@@ -146,6 +161,8 @@ def main() -> None:
             if done:
                 print("Game over.")
                 time.sleep(2)
+        
+        agent.save_actions_taken(actions_taken_file, persist=True)
 
 if __name__ == "__main__":
     main()
