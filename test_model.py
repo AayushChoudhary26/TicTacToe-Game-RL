@@ -98,11 +98,7 @@ class QLearningAgent:
         
         return chosen_action
     
-    def save_actions_taken(self, filename: str, persist: bool = False) -> None:
-        if persist:
-            with open(filename, 'a') as f:
-                f.write(str(self.actions_taken) + '\n')
-        
+    def save_actions_taken(self, filename: str) -> None:
         with open(filename, 'w') as f:
             f.write(str(self.actions_taken))
 
@@ -163,7 +159,7 @@ def main() -> None:
                 print()
                 time.sleep(2)
         
-        agent.save_actions_taken(actions_taken_file, persist=True)
+        agent.save_actions_taken(actions_taken_file)
 
 if __name__ == "__main__":
     main()
